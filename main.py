@@ -34,3 +34,11 @@ def main():
 @app.get("/tareas", tags=["Tareas"])
 def obtener_todas_las_tareas():
     return {"tareas": tareas}
+
+@app.get("/tareas/{id}", tags=["Tareas"])
+def obtener_tarea_por_id(id: int):
+    for tarea in tareas:
+        if tarea["id"] == id:
+            return {"tarea": tarea}
+    raise HTTPException(status_code=404, detail="Tarea no encontrada")
+
