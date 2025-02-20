@@ -57,3 +57,12 @@ def actualizar_tarea(id: int, tarea_actualizada: Tarea):
             tarea.update(tarea_actualizada.dict())
             return {"tarea_actualizada": tarea}
     raise HTTPException(status_code=404, detail="Tarea no encontrada")
+
+
+@app.delete("/tareas/{id}", tags=["Tareas"])
+def eliminar_tarea(id: int):
+    for tarea in tareas:
+        if tarea["id"] == id:
+            tareas.remove(tarea)
+            return {"tarea_eliminada": tarea}
+    raise HTTPException(status_code=404, detail="Tarea no encontrada") 
